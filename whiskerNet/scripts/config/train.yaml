@@ -1,0 +1,34 @@
+defaults:  
+  - _self_  
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled 
+
+mode: train
+
+wandb_project_name: whisker_sim
+name: transformer
+train_path: ../data/whiskerNet/train
+eval_path: ../data/whiskerNet/eval
+test_path: ../data/whiskerNet/test
+
+device: cuda:0
+debug: True
+max_s: 30000
+min_s: -40000
+add_noise: False
+
+batch_size: 64 #256 #change to 1 for testing
+num_epoch: 3000
+learning_rate: 0.0001
+
+sensor_dim: 2
+data_length: 125
+data_dim: 1
+max_len: 100
+
+save_to_pickle: True
+
+hydra:  
+  output_subdir: null  
+  run:  
+    dir: .

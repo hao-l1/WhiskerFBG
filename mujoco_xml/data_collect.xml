@@ -1,0 +1,155 @@
+<mujoco model="data_collect">
+  <option timestep="0.001"/>
+
+  <include file="../mujoco_xml/scene.xml"/>
+  
+  <extension>
+    <plugin plugin="mujoco.elasticity.cable"/>
+  </extension>
+
+
+  <compiler autolimits="true"/>
+
+  <size memory="10M"/>
+
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh" solimp="0.15 0.4 0.004 0.9 6" solref="0.002 1" condim="6" friction="0.2 0.0001 0.0001"/>
+    </default>
+  </default>
+
+<worldbody>
+  <body name="dummy body" pos="0 0 0">
+    <site name="dummy" rgba="0 0.1 0 0"/>
+    <!-- count and vertex should not be both specified in cable object, however it gives error if remove count parameter-->
+    <composite prefix="whisker" type="cable" offset="0. 0. 0.05" initial="none" count="1"
+      vertex=
+        "        
+        0.0000000000000000000 -0.0000000000000000000 0.0000000000000000000
+        -0.0003713300957730989 0.0013856396608519692 0.0000000000000000000
+        -0.0007425088884501058 0.0027713198756296126 0.0000000000000000000
+        -0.0011151426516514938 0.0041566093817924487 0.0000000000000000000
+        -0.0014908327315154523 0.0055410728244152255 0.0000000000000000000
+        -0.0018711876866856483 0.0069242614644481086 0.0000000000000000000
+        -0.0022571235203190979 0.0083059034690444733 0.0000000000000000000
+        -0.0026469991275319413 0.0096864394810402075 0.0000000000000000000
+        -0.0030385826804931672 0.0110664922619043340 0.0000000000000000000
+        -0.0034296573440175853 0.0124466892634620026 0.0000000000000000000
+        -0.0038180336738898096 0.0138276476042217510 0.0000000000000000000
+        -0.0042028411101051174 0.0152096049062592446 0.0000000000000000000
+        -0.0045863456148227243 0.0165919245796771336 0.0000000000000000000
+        -0.0049712461360242963 0.0179738559459237217 0.0000000000000000000
+        -0.0053602207573853634 0.0193546453924389010 0.0000000000000000000
+        -0.0057559491933135984 0.0207335132082095801 0.0000000000000000000
+        -0.0061613732843040555 0.0221095593664466968 0.0000000000000000000
+        -0.0065798088233132183 0.0234817020233328982 0.0000000000000000000
+        -0.0070145507348680714 0.0248487621350910182 0.0000000000000000000
+        -0.0074688074436042376 0.0262094579306035094 0.0000000000000000000
+        -0.0079458150158156493 0.0275623398584762536 0.0000000000000000000
+        -0.0084527734062696484 0.0289042621365921959 0.0000000000000000000
+        -0.0090011578105123370 0.0302297584975185149 0.0000000000000000000
+        -0.0096022096668170326 0.0315321712110090621 0.0000000000000000000
+        -0.0102663327406564472 0.0328035227440319627 0.0000000000000000000
+        -0.0110024662600257360 0.0340345146696774403 0.0000000000000000000
+        -0.0118169874665387063 0.0352150369381009978 0.0000000000000000000
+        -0.0127148679093797047 0.0363333775049378901 0.0000000000000000000
+        -0.0137005270621705522 0.0373750541309086012 0.0000000000000000000
+        -0.0147767538193839081 0.0383227003714253500 0.0000000000000000000
+        -0.0159427732116637078 0.0391572192419039553 0.0000000000000000000
+        -0.0171881673751875623 0.0398679492654020612 0.0000000000000000000
+        -0.0184979062516268250 0.0404517460893289299 0.0000000000000000000
+        -0.0198582690382922492 0.0409052619215320018 0.0000000000000000000
+        -0.0212563413878358171 0.0412240426997387555 0.0000000000000000000
+        -0.0226790423104695216 0.0414034053298332552 0.0000000000000000000
+        -0.0241122570498036939 0.0414552284445930466 0.0000000000000000000
+        -0.0255457969957484238 0.0414078202862107753 0.0000000000000000000
+        -0.0269679220541167788 0.0412301372437247002 0.0000000000000000000
+        -0.0282860046252674940 0.0406901987311302435 0.0000000000000000000
+        "
+        >
+    <plugin plugin="mujoco.elasticity.cable">
+      <config key="twist" value="2.8e10"/>
+      <config key="bend" value="7.5e10"/> <!-- https://www.matweb.com/search/datasheet_print.aspx?matguid=de9dd08433714f698d513766dccea437 -->
+    </plugin>
+    <joint kind="main" damping="0.005" armature="0.00003"/>
+    <geom type="capsule" size=".0001524" rgba="1. 1. 1. 1" density="6450" friction="0.2 0.0001 0.0001"
+          solref="0.002 1" solimp="0.15 0.4 0.004 0.9 6" condim="6"/> 
+      </composite>
+      <joint name="fixture_x" type="slide" damping="700" axis="1 0 0"/>
+     <site name="whisker_base" pos="0 0 0" size="0.001" rgba="0 0.1 0 0" />
+  </body>
+<body name="body_vis_0" pos="0 0 0"><geom name="test_0" type="sphere" size=".001 .001 .001" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_1" pos="0 0 0"><geom name="test_1" type="sphere" size=".001 .001 .001" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_2" pos="0 0 0"><geom name="test_2" type="sphere" size=".001 .001 .001" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_3" pos="0 0 0"><geom name="test_3" type="sphere" size=".001 .001 .001" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_4" pos="0 0 0"><geom name="test_4" type="sphere" size=".001 .001 .001" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_5" pos="0 0 0"><geom name="test_5" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_6" pos="0 0 0"><geom name="test_6" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_7" pos="0 0 0"><geom name="test_7" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_8" pos="0 0 0"><geom name="test_8" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_9" pos="0 0 0"><geom name="test_9" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_10" pos="0 0 0"><geom name="test_10" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_11" pos="0 0 0"><geom name="test_11" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_12" pos="0 0 0"><geom name="test_12" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_13" pos="0 0 0"><geom name="test_13" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_14" pos="0 0 0"><geom name="test_14" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_15" pos="0 0 0"><geom name="test_15" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_16" pos="0 0 0"><geom name="test_16" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_17" pos="0 0 0"><geom name="test_17" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_18" pos="0 0 0"><geom name="test_18" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_19" pos="0 0 0"><geom name="test_19" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_20" pos="0 0 0"><geom name="test_20" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_21" pos="0 0 0"><geom name="test_21" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_22" pos="0 0 0"><geom name="test_22" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_23" pos="0 0 0"><geom name="test_23" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_24" pos="0 0 0"><geom name="test_24" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_25" pos="0 0 0"><geom name="test_25" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_26" pos="0 0 0"><geom name="test_26" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_27" pos="0 0 0"><geom name="test_27" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_28" pos="0 0 0"><geom name="test_28" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_29" pos="0 0 0"><geom name="test_29" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_30" pos="0 0 0"><geom name="test_30" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_31" pos="0 0 0"><geom name="test_31" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_32" pos="0 0 0"><geom name="test_32" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_33" pos="0 0 0"><geom name="test_33" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_34" pos="0 0 0"><geom name="test_34" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_35" pos="0 0 0"><geom name="test_35" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_36" pos="0 0 0"><geom name="test_36" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_37" pos="0 0 0"><geom name="test_37" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_38" pos="0 0 0"><geom name="test_38" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_39" pos="0 0 0"><geom name="test_39" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_40" pos="0 0 0"><geom name="test_40" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_41" pos="0 0 0"><geom name="test_41" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_42" pos="0 0 0"><geom name="test_42" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_43" pos="0 0 0"><geom name="test_43" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_44" pos="0 0 0"><geom name="test_44" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_45" pos="0 0 0"><geom name="test_45" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_46" pos="0 0 0"><geom name="test_46" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_47" pos="0 0 0"><geom name="test_47" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_48" pos="0 0 0"><geom name="test_48" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_49" pos="0 0 0"><geom name="test_49" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+<body name="body_vis_50" pos="0 0 0"><geom name="test_50" type="sphere" size=".001 .001 .01" pos="0 0 0" rgba="1 0 0 1" class="visual"/></body>
+
+</worldbody>
+
+  <sensor>
+    <!-- Force from the whisker base to the dummy body -->
+    <force name="force_sensor" site="whiskerS_first"/>
+    <torque name="torque_sensor" site="whiskerS_first"/>
+  </sensor>
+
+  <!--
+    By using divisor=3 in the pullies we increase the distance by which the hanging sphere moves
+    relative to the motion of the winch arm. One should imagine a double spindle with two radii that
+    creates a ratio of 1.5 between the motion of tendon before the pullies and after the pullies.
+    (1.5 rather than 3 because the tendon has 2 branches and the length is split between them)
+  -->
+
+  <actuator>
+    <position name="position_servo" joint="fixture_x" ctrlrange="-1 1" ctrllimited="true" kp="3" kv="5"/>
+    <velocity name="velocity_servo" joint="fixture_x" ctrlrange="-1 1" ctrllimited="true" kv="0.1"/>
+  </actuator>
+</mujoco>

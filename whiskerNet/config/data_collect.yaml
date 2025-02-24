@@ -1,0 +1,27 @@
+defaults:  
+  - _self_  
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled  
+
+hydra:  
+  output_subdir: null  
+  run:  
+    dir: .
+
+environment:
+  xml_file: ../mujoco_xml/data_collect.xml
+  model_folder: YCB_asset/models
+  is_debug: False #set to True when debugging
+  tip_pos: [-0.003, 0.030489, 0.02585]
+  path_generator: random
+  steady_threshold: 0.000001
+  save_path: ./data/whiskerNet/objectname_data_timestamp.csv #../../data/whiskerNet/whiskerNet/objectname_data_timestamp.csv
+  save_force: False
+  save_torque: True
+  start_idx: 0
+  num_envs: 1
+  traj_per_obj_env: 5
+  keep_intro_outro_0: 200
+  sample_pts: 20000
+  max_torque: 2200000
+  min_torque: -2500000

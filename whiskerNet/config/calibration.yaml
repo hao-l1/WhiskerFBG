@@ -1,0 +1,25 @@
+rod:
+  num_segments: 400 
+  elastic_modulus: 7.5e10
+  shear_modulus: 2.8e10
+  density: 6450
+  gravity: [0, 0, 0]
+  length: 0.05356194
+  force_threshold: 0.009
+  num_tentaive_positions: 11
+  radius: 0.0001016
+
+environment:
+  xml_file: ../mujoco_xml/calibration.xml
+  is_debug: True
+  tip_pos: [-0.00, 0.065383, 0.02585] # we add 8mm offset to y value
+  path_generator: random
+  steady_threshold: 1e-6
+  save_path: ./data/calibration/calibration_timestamp.csv
+  save_force: False
+  save_torque: True
+  num_steps: 3 #10
+  method: POLAR_COORDS
+  r_array: [0.035,  0.038, 0.036] #[0.035, 0.036, 0.038, 0.038, 0.04, 0.037, 0.036]
+  phi_array: [80, 90, 100] #[80, 85, 90, 95, 100]
+  theta_array: [160, 145, 130] #[160, 155, 150, 145, 140, 135, 130]
