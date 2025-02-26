@@ -9,8 +9,8 @@ Inspired by aquatic mammals like pinnipeds, which use whiskers to detect objects
 Given that our major contributions focus on a **machine learning approach leveraging whisker simulation for expedited training**, we are open-sourcing all related software to facilitate research replication and further development.
 
 ### Specifically, we provide:
-- **CAD model files** for the whisker sensor design *(TBD due to ongoing disclosure with Stanford OTL)*;
-- **Standard mesh and model files** for the FEA used in Bragg cell placement *(TBD due to ongoing disclosure with Stanford OTL)*;
+- **CAD model files** for the whisker sensor design (Design_files/WhiskerSensor.step);
+- **Standard mesh and model files** for the FEA used in Bragg cell placement (Design_files/FEA.zip);
 - **Simulation code** for whisker dynamics in MuJoCo and contact data collection;
 - **Deep learning model code**, including structure, training/testing scripts, and a pretrained model.
 
@@ -50,7 +50,7 @@ The **MuJoCo Cosserat rod approximation** allows us to rapidly simulate whisker 
 The **FBG sensors** are embedded in a 3D-printed resin structure, with the Nitinol whisker inserted next to the FBG location. When a force is applied to the whisker, it generates a torque at the base, deforming the structure. The FBG measures this deformation as a **wavelength shift**, governed by:
 
 $$
-\text{Base Torque: } \quad T = F \times L
+\text{Base Torque: } \quad T = \vec{r} \times F 
 $$
 
 $$
@@ -61,7 +61,7 @@ $$
 \text{FBG Wavelength Shift: } \quad \Delta \lambda = \lambda_0 \times (1 - P_e) \epsilon
 $$
 
-where $L$ is the distance to the base, $c$ is the distance from the neutral axis to the FBG, $E$ is the elastic modulus, $I$ is the second moment of area, $P_e$ is the effective photoelastic constant, and $\lambda_0$ is the original FBG wavelength.
+where $\vec{r}$ is contact position relative in the base frame, $c$ is the distance from the neutral axis to the FBG, $E$ is the elastic modulus, $I$ is the second moment of area, $P_e$ is the effective photoelastic constant, and $\lambda_0$ is the original FBG wavelength.
 
 ### Machine Learning for Contact Tracking
 
